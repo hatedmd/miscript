@@ -1,0 +1,15 @@
+var = ""
+window = window.init(800, 600)
+
+function(){
+    var = entry
+    window.Text(text:$var, x:100, y:150)
+    window.pack
+}
+
+window.BG(colour:navy)
+window.Text(text:"Type something below:", x:100, y:100)
+window.Text(text:" ", x:100, y:150)
+
+window.Input(entry:var, x:100, y:200, width:20, length:50)
+window.Button(onClick:function(), x:100, y:260, width:15, length:2, colour:green, text:"Submit")

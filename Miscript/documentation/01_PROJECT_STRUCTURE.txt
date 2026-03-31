@@ -1,0 +1,161 @@
+================================================================================
+                    MIS PARSER - PROJECT STRUCTURE
+================================================================================
+
+FOLDER LAYOUT:
+--------------
+
+mis_parser/
+│
+├── main.py                      # Entry point (run this file)
+├── .gitignore                   # Git ignore file
+│
+├── docs/                        # Documentation folder
+│   ├── 00_INDEX.txt
+│   ├── 01_PROJECT_STRUCTURE.txt
+│   ├── 02_MAIN_PY.txt
+│   ├── 03_FUNCTIONS_UTILS.txt
+│   ├── 04_FUNCTIONS_FILE.txt
+│   ├── 05_FUNCTIONS_VARIABLE.txt
+│   ├── 06_FUNCTIONS_STATEMENT.txt
+│   ├── 07_FUNCTIONS_PRINT.txt
+│   ├── 08_FUNCTIONS_EXPRESSION.txt
+│   ├── 09_FUNCTIONS_WINDOW.txt
+│   ├── 10_FUNCTIONS_RUNNER.txt
+│   ├── 11_MIS_SYNTAX.txt
+│   ├── 12_EXAMPLES.txt
+│   └── 13_TROUBLESHOOTING.txt
+│
+├── functions/                   # All function modules
+│   ├── __init__.py             # Package initialization
+│   ├── utils.py                # Utility functions
+│   ├── file_handler.py         # File operations
+│   ├── variable_parser.py      # Variable parsing
+│   ├── statement_parser.py     # Statement parsing
+│   ├── print_parser.py         # Print statement parsing
+│   ├── expression_evaluator.py # Expression evaluation
+│   ├── window_handler.py       # Tkinter window creation
+│   └── runner.py               # Main execution logic
+│
+└── apps/                        # Your .mis files go here
+    ├── example.mis
+    └── ...
+
+================================================================================
+                           FILE DESCRIPTIONS
+================================================================================
+
+main.py
+-------
+Purpose: Entry point for the MIS parser
+What it does:
+  - Clears terminal screen
+  - Finds .mis files in apps/ folder
+  - Calls runner to process files
+Run: python main.py
+
+functions/__init__.py
+---------------------
+Purpose: Makes 'functions' a Python package
+What it does:
+  - Imports all functions from submodules
+  - Exports them via __all__ list
+
+functions/utils.py
+------------------
+Purpose: Shared utility functions
+Contains:
+  - is_string_literal()
+  - is_number()
+  - extract_string_content()
+  - format_variable_output()
+
+functions/file_handler.py
+-------------------------
+Purpose: File system operations
+Contains:
+  - find_mis_files()
+  - read_file_content()
+  - get_file_info()
+
+functions/variable_parser.py
+----------------------------
+Purpose: Parse variable assignments
+Contains:
+  - parse_variable()
+  - parse_all_variables()
+
+functions/statement_parser.py
+-----------------------------
+Purpose: Parse all statement types
+Contains:
+  - parse_statement()
+  - parse_all_statements()
+
+functions/print_parser.py
+-------------------------
+Purpose: Parse print statements
+Contains:
+  - extract_print_argument()
+  - is_simple_string()
+  - extract_string_from_print()
+  - parse_all_print_statements()
+
+functions/expression_evaluator.py
+---------------------------------
+Purpose: Evaluate expressions safely
+Contains:
+  - escape_string_for_eval()
+  - substitute_variables()
+  - safe_eval_expression()
+  - evaluate_print_statement()
+
+functions/window_handler.py
+---------------------------
+Purpose: Create and manage Tkinter windows
+Contains:
+  - Window class
+  - create_window()
+  - add_text_to_window()
+  - set_window_background()
+  - wait_for_windows()
+
+functions/runner.py
+-------------------
+Purpose: Main execution logic
+Contains:
+  - interpolate_string()
+  - is_string_literal()
+  - extract_string_content()
+  - resolve_param_value()
+  - execute_statements()
+  - run_mis_file()
+  - run_all_mis_files()
+
+================================================================================
+                           DEPENDENCIES
+================================================================================
+
+Python Standard Library:
+- pathlib (file paths)
+- re (regular expressions)
+- os (terminal clearing)
+- tkinter (window creation)
+- threading (window threads)
+
+No external packages required!
+
+================================================================================
+                         SYSTEM REQUIREMENTS
+================================================================================
+
+- Python 3.6 or higher
+- Tkinter (usually included with Python)
+- Terminal/Command Prompt
+
+To check Tkinter:
+  python -c "import tkinter; print('Tkinter OK')"
+
+================================================================================
+                        END OF PROJECT STRUCTURE
+================================================================================
