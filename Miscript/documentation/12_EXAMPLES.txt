@@ -1,0 +1,107 @@
+================================================================================
+                      MIS PARSER - CODE EXAMPLES
+================================================================================
+
+EXAMPLE 1 - Hello World
+-----------------------
+
+print("Hello, World!")
+
+Output:
+    Hello, World!
+
+
+EXAMPLE 2 - Variables
+---------------------
+
+name = "Alice"
+age = 25
+print(name)
+print(age)
+print(name + " is " + str(age))
+
+Output:
+    Alice
+    25
+    Alice is 25
+
+
+EXAMPLE 3 - String Interpolation
+--------------------------------
+
+name = "Bob"
+message = ("Hello $name.")
+print(message)
+
+Output:
+    Hello Bob.
+
+
+EXAMPLE 4 - User Input
+----------------------
+
+name = input("Enter your name > ")
+print("Hello $name.")
+
+Interaction:
+    Enter your name > Charlie
+    Hello Charlie.
+
+
+EXAMPLE 5 - Window with Text
+----------------------------
+
+window = window.init(600, 600)
+window.Text(text:"Welcome!", x:100, y:100)
+
+Output:
+    [600x600 window with "Welcome!" at (100, 100)]
+
+
+EXAMPLE 6 - Window Background
+------------------------------
+
+window = window.init(600, 600)
+window.BG(colour:blue)
+window.Text(text:"Hello", x:100, y:100)
+
+Output:
+    [Blue window with "Hello" text]
+
+
+EXAMPLE 7 - All Color Formats
+-----------------------------
+
+window = window.init(600, 600)
+
+# RGB
+window.BG(colourRGB:255, 0, 0)
+
+# HEX
+# window.BG(colourHEX:#FF0000)
+
+# Named
+# window.BG(colour:red)
+
+
+EXAMPLE 8 - Complete Program
+----------------------------
+
+# Get user info
+name = input("Enter name > ")
+age = input("Enter age > ")
+
+# Create message
+message = ("Hello $name, you are $age years old.")
+
+# Print to terminal
+print(message)
+
+# Show in window
+window = window.init(800, 600)
+window.BG(colour:navy)
+window.Text(text:$message, x:100, y:100)
+
+================================================================================
+                        END OF EXAMPLES
+================================================================================

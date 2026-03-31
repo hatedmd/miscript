@@ -1,0 +1,94 @@
+================================================================================
+          MIS PARSER - functions/expression_evaluator.py DOCUMENTATION
+================================================================================
+
+FILE: functions/expression_evaluator.py
+PURPOSE: Evaluate expressions with variable substitution safely
+
+================================================================================
+                            FUNCTIONS
+================================================================================
+
+FUNCTION: escape_string_for_eval(text)
+--------------------------------------
+
+Signature:
+    def escape_string_for_eval(text):
+
+Purpose:
+    Escape a string value so it's safe for eval()
+
+Parameters:
+    text (str): The string to escape
+
+Returns:
+    str: Escaped string
+
+Examples:
+    escape_string_for_eval('hello "world"')  
+    → 'hello \\"world\\"'
+
+
+FUNCTION: substitute_variables(expression, variables)
+-----------------------------------------------------
+
+Signature:
+    def substitute_variables(expression, variables):
+
+Purpose:
+    Substitute variable names with their values
+
+Parameters:
+    expression (str): Expression with variables
+    variables (dict): Variable dictionary
+
+Returns:
+    str: Expression with variables replaced
+
+Examples:
+    substitute_variables('x + y', {'x': {'value': 1}, 'y': {'value': 2}})
+    → '1 + 2'
+    
+    substitute_variables('$name', {'name': {'value': 'John'}})
+    → '"John"'
+
+
+FUNCTION: safe_eval_expression(expression, variables)
+-----------------------------------------------------
+
+Signature:
+    def safe_eval_expression(expression, variables):
+
+Purpose:
+    Safely evaluate expression with variable substitution
+
+Parameters:
+    expression (str): Expression to evaluate
+    variables (dict): Variable dictionary
+
+Returns:
+    tuple: (result_string, error_message_or_None)
+
+Safe Builtins:
+    str, int, float, len, abs, round, min, max, sum
+
+
+FUNCTION: evaluate_print_statement(print_arg, variables)
+--------------------------------------------------------
+
+Signature:
+    def evaluate_print_statement(print_arg, variables):
+
+Purpose:
+    Evaluate a print statement and return output
+
+Parameters:
+    print_arg (str): Print argument
+    variables (dict): Variable dictionary
+
+Returns:
+    tuple: (output_string, error_message_or_None)
+
+================================================================================
+                        END OF expression_evaluator.py DOCS
+================================================================================

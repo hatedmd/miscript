@@ -1,0 +1,89 @@
+================================================================================
+                 MIS PARSER - TROUBLESHOOTING GUIDE
+================================================================================
+
+ERROR: Cannot evaluate 'text_message': invalid syntax
+-----------------------------------------------------
+
+Cause: String quotes not properly escaped
+Fix: Check expression_evaluator.py has escape_string_for_eval()
+
+
+ERROR: ImportError: cannot import name 'parse_window_init'
+----------------------------------------------------------
+
+Cause: Function removed but still in __init__.py
+Fix: Remove from __init__.py imports
+
+
+ERROR: Window doesn't open
+--------------------------
+
+Cause: Thread killed before window shows
+Fix: Ensure daemon=False and wait_for_windows() is called
+
+
+ERROR: __pycache__ folder appeared
+----------------------------------
+
+Cause: Normal Python bytecode cache
+Fix: Ignore it or add to .gitignore
+
+
+ERROR: Space after $variable not consumed
+-----------------------------------------
+
+Cause: Regex pattern doesn't include \s*
+Fix: Check interpolate_string() has pattern r'\$([a-zA-Z_][a-zA-Z0-9_]*)\s*'
+
+
+ERROR: input() doesn't work
+---------------------------
+
+Cause: input statement type not handled
+Fix: Check runner.py has 'input' type in execute_statements()
+
+
+ERROR: Named color not recognized
+---------------------------------
+
+Cause: Color name not in NAMED_COLORS
+Fix: Add to window_handler.py NAMED_COLORS dictionary
+
+
+ERROR: Variable not found
+-------------------------
+
+Cause: Variable used before defined
+Fix: Define variables before using them
+
+
+ERROR: Window.Text() doesn't show
+---------------------------------
+
+Cause: Window not created first
+Fix: Call window.init() before window.Text()
+
+
+================================================================================
+                              FAQ
+================================================================================
+
+Q: Can I use both $var and var syntax?
+A: Yes! Both work everywhere.
+
+Q: Does the space after $variable matter?
+A: Yes! It's consumed during interpolation.
+
+Q: Can I create multiple windows?
+A: Yes! But only the first one shows with mainloop().
+
+Q: Are there any security risks?
+A: No! eval() uses restricted builtins only.
+
+Q: Can I import external modules?
+A: No! Only safe builtins are allowed.
+
+================================================================================
+                        END OF TROUBLESHOOTING
+================================================================================
