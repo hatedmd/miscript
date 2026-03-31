@@ -1,0 +1,114 @@
+================================================================================
+                 MIS PARSER - TROUBLESHOOTING GUIDE
+================================================================================
+
+ERROR: Cannot evaluate 'text_message': invalid syntax
+-----------------------------------------------------
+
+Cause: String quotes not properly escaped
+Fix: Check expression_evaluator.py has escape_string_for_eval()
+
+
+ERROR: Button not visible
+-------------------------
+
+Cause: Button color blends with background
+Fix: Use contrasting colors (green on navy, red on white)
+     Button defaults to lightgray with auto text color
+
+
+ERROR: onClick not working
+--------------------------
+
+Cause: function() not defined before button
+Fix: Define function{} before window.Button()
+
+
+ERROR: Input field value not updating
+-------------------------------------
+
+Cause: entry keyword not resolved
+Fix: Ensure window.Input() uses entry:var_name
+     Function uses var = entry
+
+
+ERROR: Nested parentheses parsing fails
+---------------------------------------
+
+Cause: Old parser doesn't handle onClick:function()
+Fix: Use updated statement_parser.py with _extract_method_params()
+
+
+ERROR: __pycache__ folder appeared
+----------------------------------
+
+Cause: Normal Python bytecode cache
+Fix: Ignore it or add to .gitignore
+
+
+ERROR: Space after $variable not consumed
+-----------------------------------------
+
+Cause: Regex pattern doesn't include \s*
+Fix: Check interpolate_string() has pattern r'\$([a-zA-Z_][a-zA-Z0-9_]*)\s*'
+
+
+ERROR: Named color not recognized
+---------------------------------
+
+Cause: Color name not in NAMED_COLORS
+Fix: Add to window_handler.py NAMED_COLORS dictionary
+
+
+ERROR: Variable not found
+-------------------------
+
+Cause: Variable used before defined
+Fix: Define variables before using them
+
+
+ERROR: window.pack not refreshing
+---------------------------------
+
+Cause: pack() called before window created
+Fix: Call window.init() before window.pack
+
+
+================================================================================
+                              FAQ
+================================================================================
+
+Q: Can I use both $var and var syntax?
+A: Yes! Both work everywhere.
+
+Q: Does the space after $variable matter?
+A: Yes! It's consumed during interpolation.
+
+Q: Can I create multiple windows?
+A: Yes! But only the first one shows with mainloop().
+
+Q: Are there any security risks?
+A: No! eval() uses restricted builtins only.
+
+Q: Can I import external modules?
+A: No! Only safe builtins are allowed.
+
+Q: How do I make a button visible?
+A: Use contrasting colors. Green/red on navy, any color on white.
+
+Q: Can I have multiple functions?
+A: Currently supports one 'default' function. Multiple functions planned.
+
+Q: Does onClick support arguments?
+A: Currently onClick:function() only. Arguments planned.
+
+Q: What colors are available?
+A: red, green, blue, navy, white, black, yellow, orange, purple, pink, etc.
+
+Q: How do I update text after button click?
+A: Use function(){ var = entry; window.Text(text:$var); window.pack }
+
+
+================================================================================
+                        END OF TROUBLESHOOTING
+================================================================================

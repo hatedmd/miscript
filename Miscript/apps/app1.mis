@@ -1,0 +1,20 @@
+#!/usr/bin/env python3
+# miscript
+
+name = ""
+window = window.init(800, 600)
+
+# ADD THIS - Function to handle button click
+function(){
+    name = entry
+    window.Text(text:$name, x:100, y:150)
+    window.pack
+}
+
+window.BG(colour:grey)
+window.Text(text:"Type name below:", x:100, y:100)
+window.Text(text:" ", x:100, y:150)
+
+window.Input(entry:name, x:100, y:200, width:20, length:50)
+# ADD onClick:function() HERE
+window.Button(onClick:function(), x:100, y:260, width:10, length:2, colour:green, text:"Submit")

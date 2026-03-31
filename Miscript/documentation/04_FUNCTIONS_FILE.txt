@@ -1,0 +1,110 @@
+================================================================================
+               MIS PARSER - functions/file_handler.py DOCUMENTATION
+================================================================================
+
+FILE: functions/file_handler.py
+PURPOSE: Handle all file system operations
+
+================================================================================
+                            FUNCTIONS
+================================================================================
+
+FUNCTION: find_mis_files(directory, recursive=False)
+----------------------------------------------------
+
+Signature:
+    def find_mis_files(directory, recursive=False):
+
+Purpose:
+    Find all .mis files in a directory
+
+Parameters:
+    directory (str): Path to search (e.g., "apps")
+    recursive (bool): If True, search subdirectories too
+
+Returns:
+    tuple: (list_of_Path_objects, error_message_or_None)
+
+Examples:
+    files, error = find_mis_files("apps")
+    files, error = find_mis_files("apps", recursive=True)
+
+Error cases:
+    - Directory doesn't exist → (None, "Error: 'apps' directory not found!")
+    - No .mis files → ([], None)
+
+
+FUNCTION: read_file_content(filepath)
+-------------------------------------
+
+Signature:
+    def read_file_content(filepath):
+
+Purpose:
+    Read content from a file
+
+Parameters:
+    filepath (Path): Path object to the file
+
+Returns:
+    tuple: (content_string, error_message_or_None)
+
+Examples:
+    content, error = read_file_content(Path("apps/test.mis"))
+    
+    if error:
+        print(f"Error: {error}")
+    else:
+        print(content)
+
+Error cases:
+    - File doesn't exist → (None, "Error reading file: ...")
+    - Permission denied → (None, "Error reading file: ...")
+
+
+FUNCTION: get_file_info(filepath)
+---------------------------------
+
+Signature:
+    def get_file_info(filepath):
+
+Purpose:
+    Get information about a file
+
+Parameters:
+    filepath (Path): Path object to the file
+
+Returns:
+    dict: File information
+
+Example output:
+    {
+        'name': 'test.mis',
+        'path': 'apps/test.mis',
+        'exists': True
+    }
+
+================================================================================
+                           USAGE EXAMPLES
+================================================================================
+
+# Find all .mis files
+mis_files, error = find_mis_files("apps")
+if error:
+    print(error)
+else:
+    for f in mis_files:
+        print(f"Found: {f.name}")
+
+# Read file content
+content, error = read_file_content(mis_files[0])
+if not error:
+    print(f"File has {len(content)} characters")
+
+# Get file info
+info = get_file_info(mis_files[0])
+print(f"File: {info['name']} at {info['path']}")
+
+================================================================================
+                        END OF file_handler.py DOCS
+================================================================================

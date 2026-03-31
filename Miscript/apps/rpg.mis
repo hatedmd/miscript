@@ -1,0 +1,172 @@
+#!/usr/bin/env python3
+# miscript - Mini RPG Game (Clean Redesign)
+
+# Game Variables
+player_name = "Hero"
+player_class = "Warrior"
+player_hp = 100
+player_max_hp = 100
+player_attack = 10
+enemy_name = "Goblin"
+enemy_hp = 50
+enemy_max_hp = 50
+enemy_attack = 5
+screen = "start"
+
+# Initialize Window
+window = window.init(800, 600)
+window.BG(colour:navy)
+
+# ============================================
+# SCREEN 1: START SCREEN
+# ============================================
+function_show_start(){
+    screen = "start"
+    window.Text(text:"⚔️ MINI RPG GAME ⚔️", x:250, y:80)
+    window.Text(text:"Enter your name:", x:280, y:200)
+    window.Input(entry:player_name, x:280, y:250, width:15, length:20)
+    window.Button(onClick:function_start_game(), x:280, y:310, width:8, length:1, colour:green, text:"Start Game")
+    window.pack
+}
+
+function_start_game(){
+    name_input = entry
+    if name_input != "":
+        player_name = name_input
+    screen = "class"
+    window.Text(text:"Choose your class, $player_name!", x:230, y:150)
+    window.Button(onClick:function_warrior(), x:200, y:250, width:10, length:1, colour:blue, text:"Warrior")
+    window.Button(onClick:function_mage(), x:340, y:250, width:10, length:1, colour:purple, text:"Mage")
+    window.Button(onClick:function_rogue(), x:480, y:250, width:10, length:1, colour:red, text:"Rogue")
+    window.Text(text:"HP:150 ATK:15", x:210, y:290)
+    window.Text(text:"HP:80 ATK:25", x:355, y:290)
+    window.Text(text:"HP:100 ATK:20", x:490, y:290)
+    window.pack
+}
+
+# ============================================
+# CLASS SELECTION
+# ============================================
+function_warrior(){
+    player_class = "Warrior"
+    player_hp = 150
+    player_max_hp = 150
+    player_attack = 15
+    start_battle()
+}
+
+function_mage(){
+    player_class = "Mage"
+    player_hp = 80
+    player_max_hp = 80
+    player_attack = 25
+    start_battle()
+}
+
+function_rogue(){
+    player_class = "Rogue"
+    player_hp = 100
+    player_max_hp = 100
+    player_attack = 20
+    start_battle()
+}
+
+# ============================================
+# BATTLE SCREEN
+# ============================================
+function start_battle(){
+    screen = "battle"
+    window.Text(text:"⚔️ BATTLE ⚔️", x:320, y:50)
+    update_stats()
+    window.Text(text:"A wild $enemy_name appears!", x:280, y:350)
+    window.Button(onClick:function_attack(), x:200, y:430, width:8, length:1, colour:green, text:"⚔️ Attack")
+    window.Button(onClick:function_heal(), x:340, y:430, width:8, length:1, colour:blue, text:"💚 Heal")
+    window.Button(onClick:function_flee(), x:480, y:430, width:8, length:1, colour:red, text:"🏃 Flee")
+    window.pack
+}
+
+function update_stats(){
+    player_stats = "$player_name ($player_class) | HP: $player_hp/$player_max_hp | ATK: $player_attack"
+    window.Text(text:$player_stats, x:150, y:100)
+    enemy_stats = "$enemy_name | HP: $enemy_hp/$enemy_max_hp | ATK: $enemy_attack"
+    window.Text(text:$enemy_stats, x:250, y:300)
+}
+
+# ============================================
+# BATTLE ACTIONS
+# ============================================
+function function_attack(){
+    damage = player_attack
+    enemy_hp = enemy_hp - damage
+    log = "You hit $enemy_name for $damage damage!"
+    
+    if enemy_hp <= 0:
+        enemy_hp = 0
+        log = "🎉 Victory! $enemy_name defeated!"
+        window.Button(onClick:function_next_battle(), x:320, y:500, width:10, length:1, colour:yellow, text:"Next Battle")
+    else:
+        player_hp = player_hp - enemy_attack
+        log = "$log | $enemy_name hits you for $enemy_attack!"
+        if player_hp <= 0:
+            player_hp = 0
+            log = "💀 Game Over! You were defeated..."
+            window.Button(onClick:function_restart(), x:320, y:500, width:10, length:1, colour:gray, text:"Restart Game")
+    
+    update_stats()
+    window.Text(text:$log, x:220, y:380)
+    window.pack
+}
+
+function function_heal(){
+    heal = 30
+    player_hp = player_hp + heal
+    if player_hp > player_max_hp:
+        player_hp = player_max_hp
+    log = "💚 Healed for $heal HP!"
+    
+    player_hp = player_hp - enemy_attack
+    if player_hp <= 0:
+        player_hp = 0
+        log = "💀 Game Over! You were defeated..."
+        window.Button(onClick:function_restart(), x:320, y:500, width:10, length:1, colour:gray, text:"Restart Game")
+    else:
+        log = "$log | $enemy_name hits for $enemy_attack!"
+    
+    update_stats()
+    window.Text(text:$log, x:220, y:380)
+    window.pack
+}
+
+function function_flee(){
+    window.Text(text:"🏃 You fled from battle!", x:280, y:380)
+    window.pack
+}
+
+function function_next_battle(){
+    enemy_max_hp = enemy_max_hp + 30
+    enemy_hp = enemy_max_hp
+    enemy_attack = enemy_attack + 3
+    player_hp = player_max_hp
+    enemy_name = "Orc"
+    if screen == "battle":
+        window.Text(text:"A wild $enemy_name appears!", x:280, y:350)
+        update_stats()
+        window.pack
+}
+
+function function_restart(){
+    player_hp = player_max_hp
+    enemy_name = "Goblin"
+    enemy_hp = 50
+    enemy_max_hp = 50
+    enemy_attack = 5
+    screen = "start"
+    window.Text(text:"⚔️ MINI RPG GAME ⚔️", x:250, y:80)
+    window.Text(text:"Enter your name:", x:280, y:200)
+    window.pack
+}
+
+# ============================================
+# SHOW START SCREEN
+# ============================================
+function_show_start()

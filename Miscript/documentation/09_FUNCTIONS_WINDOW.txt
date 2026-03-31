@@ -1,0 +1,207 @@
+================================================================================
+            MIS PARSER - functions/window_handler.py DOCUMENTATION
+================================================================================
+
+FILE: functions/window_handler.py
+PURPOSE: Create and manage Tkinter windows with full widget support
+
+================================================================================
+                              CLASS
+================================================================================
+
+CLASS: Window
+-------------
+
+Attributes:
+    width (int): Window width in pixels
+    height (int): Window height in pixels
+    window (Tk): Tkinter window object
+    widgets (list): List of all widgets
+    entries (dict): Input field widgets by variable name
+    labels (dict): Label widgets by name
+    buttons (dict): Button widgets by text
+    variables (dict): Reference to variables dict
+
+Methods:
+    create() → bool
+        Creates the Tkinter window
+    
+    add_text(text, x, y, label_name=None) → bool
+        Adds text label at coordinates
+        - fg='white' for visibility on dark backgrounds
+    
+    update_label(label_name, new_text) → bool
+        Updates existing label text
+    
+    add_input(var_name, x, y, width_chars, max_length, variables) → bool
+        Adds text input field
+        - bg='white', fg='black' for visibility
+    
+    add_button(x, y, text, on_click_callback, width, length, colour) → bool
+        Adds button with onClick callback
+        - Auto-detects text color based on background
+        - relief='raised', bd=3 for visibility
+    
+    set_background(color_type, color_value) → bool
+        Sets window background color
+        - Updates all labels to match
+    
+    pack() → bool
+        Refreshes window display
+    
+    show()
+        Displays the window with mainloop()
+
+================================================================================
+                            FUNCTIONS
+================================================================================
+
+FUNCTION: create_window(window_name, width, height)
+---------------------------------------------------
+
+Signature:
+    def create_window(window_name, width, height):
+
+Purpose:
+    Create a window and store it
+
+Returns:
+    Window object or None
+
+
+FUNCTION: get_window(window_name)
+---------------------------------
+
+Signature:
+    def get_window(window_name):
+
+Purpose:
+    Get a stored window by name
+
+Returns:
+    Window object or None
+
+
+FUNCTION: add_text_to_window(window_name, text, x, y, label_name=None)
+----------------------------------------------------------------------
+
+Signature:
+    def add_text_to_window(window_name, text, x, y, label_name=None):
+
+Purpose:
+    Add text to a stored window
+
+Returns:
+    bool: Success or failure
+
+
+FUNCTION: add_input_to_window(window_name, var_name, x, y, width_chars, max_length, variables)
+----------------------------------------------------------------------------------------------
+
+Signature:
+    def add_input_to_window(window_name, var_name, x, y, width_chars, max_length, variables):
+
+Purpose:
+    Add input field to a stored window
+
+Parameters:
+    var_name: Variable to store input
+    width_chars: Entry width in characters
+    max_length: Maximum characters allowed
+
+Returns:
+    bool: Success or failure
+
+
+FUNCTION: get_input_from_window(window_name, var_name)
+------------------------------------------------------
+
+Signature:
+    def get_input_from_window(window_name, var_name):
+
+Purpose:
+    Get input value from a window field
+
+Returns:
+    str: Current input value or None
+
+
+FUNCTION: add_button_to_window(window_name, x, y, text, on_click_callback, width, length, colour)
+-------------------------------------------------------------------------------------------------
+
+Signature:
+    def add_button_to_window(window_name, x, y, text, on_click_callback, width, length, colour):
+
+Purpose:
+    Add button to a stored window with colour support
+
+Parameters:
+    on_click_callback: Function to call on click
+    colour: Button background color (name or hex)
+    width: Button width in characters
+    length: Button height in lines
+
+Color Handling:
+    - Converts named colors to hex
+    - Auto-detects text color (white on dark, black on light)
+
+Returns:
+    bool: Success or failure
+
+
+FUNCTION: set_window_background(window_name, color_type, color_value)
+---------------------------------------------------------------------
+
+Signature:
+    def set_window_background(window_name, color_type, color_value):
+
+Purpose:
+    Set background color of a stored window
+
+Color Types:
+    - 'rgb_color': [r, g, b]
+    - 'hex_color': '#RRGGBB'
+    - 'named_color': 'red', 'blue', etc.
+
+Returns:
+    bool: Success or failure
+
+
+FUNCTION: pack_window(window_name)
+----------------------------------
+
+Signature:
+    def pack_window(window_name):
+
+Purpose:
+    Refresh/update a window
+
+Returns:
+    bool: Success or failure
+
+
+FUNCTION: wait_for_windows()
+----------------------------
+
+Signature:
+    def wait_for_windows():
+
+Purpose:
+    Wait for all windows to close
+
+================================================================================
+                          NAMED COLORS
+================================================================================
+
+Available Colors:
+    red, green, blue, black, white, yellow, cyan, magenta,
+    gray, grey, orange, purple, pink, brown, navy, lime,
+    teal, maroon, olive, silver, lightgray, darkgray
+
+Color Helper:
+    get_color_hex(color_value) → str
+        Converts color name or hex to hex value
+
+================================================================================
+                        END OF window_handler.py DOCS
+================================================================================
